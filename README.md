@@ -9,6 +9,14 @@ created to interact/react with the server]. The idea is to mimic common server i
 certain user data and periodically sends each user a notification(s). This Ktor backend will act as that server and send 
 notifications through Firebase, which are then transmitted and received by the target devices.
 
+To have an overview of how this application works, see the image below from the Firebase 
+<a href="https://firebase.google.com/docs/cloud-messaging/fcm-architecture">documentation</a> where the server is 
+part of (1) and interacts with (2) Firebase Cloud Messaging (FCM) Backend; (3) Platform-level message support, in this 
+case Android transport layer; the finally (4) the device with Firebase Messaging SDK:
+
+<img src="https://github.com/akitikkx/channel-me-perfect-ktor/blob/main/screenshots/diagram-FCM.png?raw=true" alt="FCM Architectural Overview"/>
+FCM Architectural Overview from Firebase documentation 
+
 The sample currently sends push notifications to a single device, using a given Firebase Messaging token. 
 The push notifications sent from this sample are currently of two message types as per the 
 documentation 
