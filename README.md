@@ -1,4 +1,4 @@
-# Ktor: Firebase Admin Sample Backend
+# Channel Me Perfect Ktor - A Ktor-based Firebase Admin SDK Sample Backend
 
 ## About the application
 
@@ -72,9 +72,10 @@ The project requires that you get a private key file from Firebase. You will nee
 from there navigate to `Project Settings` > `Service Accounts` > `Firebase Admin SDK`. Choose `Java` for the 
 "Admin SDK configuration snippet" then click "Generate new private key".
 
-Store this file in the `src/main/resources` folder. The `src/main/kotlin/com/example/Application.kt` expects the filename to 
+Store this downloaded file in the `src/main/resources` folder. The `src/main/kotlin/com/example/Application.kt` expects the filename to 
 be `ktor-firebase-auth.json`. Feel free to name the file how you would want and remember to update the name inside the 
-`getResourceAsStream()` call in `src/main/kotlin/com/example/Application.kt`
+`getResourceAsStream()` call in `src/main/kotlin/com/example/Application.kt` as well as in the `.gitignore` file. The file is ignored in `.gitignore` and 
+should remain that way as this is a private file that should not be committed to the repository.
 
 ## Dependencies
 - Firebase Admin `com.google.firebase:firebase-admin`
