@@ -15,8 +15,6 @@ part of (1) and interacts with (2) Firebase Cloud Messaging (FCM) Backend; (3) P
 case Android transport layer; the finally (4) the device with Firebase Messaging SDK:
 
 <img src="https://github.com/akitikkx/channel-me-perfect-ktor/blob/main/screenshots/diagram-FCM.png?raw=true" alt="FCM Architectural Overview" />
-FCM Architectural Overview from Firebase documentation\
-
 
 The sample currently sends push notifications to a single device, using a given Firebase Messaging token. 
 The push notifications sent from this sample are currently of two message types as per the 
