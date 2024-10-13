@@ -5,7 +5,9 @@
 This is a sample Ktor project that aims to demonstrate using Firebase Admin SDK to send push notifications to specific 
 Android devices that have the `com.google.firebase:firebase-messaging` SDK installed and actively listening for new 
 messages. [See <a href="https://github.com/akitikkx/channel-me-perfect-android">here</a> a sample Android app I 
-created to interact/react with the server].
+created to interact/react with the server]. The idea is to mimic common server interactions where a server manages 
+certain user data and periodically sends each user a notification(s). This Ktor backend will act as that server and send 
+notifications through Firebase, which are then transmitted and received by the target devices.
 
 The sample currently sends push notifications to a single device, using a given Firebase Messaging token. 
 The push notifications sent from this sample are currently of two message types as per the 
