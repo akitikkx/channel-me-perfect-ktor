@@ -1,4 +1,4 @@
-package com.example.models
+package com.example.models.android
 
 import com.google.firebase.messaging.Message
 import com.google.firebase.messaging.Notification
