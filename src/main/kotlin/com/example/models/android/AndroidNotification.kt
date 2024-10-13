@@ -2,7 +2,7 @@ package com.example.models.android
 
 import java.time.Instant
 
-data class Notification(
+data class AndroidNotification(
     val title: String,
     val body: String,
     val icon: String,
@@ -32,7 +32,7 @@ data class Notification(
     val proxy: Proxy
 )
 
-val testNotification = Notification(
+val testAndroidNotification = AndroidNotification(
     title = "Test Notification",
     body = "This is a test notification with a long body.",
     icon = "notification_icon",
