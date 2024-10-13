@@ -1,5 +1,7 @@
 # Ktor: Firebase Admin Sample Backend
 
+## About the application
+
 This is a sample Ktor project that aims to demonstrate using Firebase Admin SDK to send push notifications to specific 
 Android devices that have the `com.google.firebase:firebase-messaging` SDK installed and actively listening for new 
 messages. [See <a href="https://github.com/akitikkx/channel-me-perfect-android">here</a> a sample Android app I 
@@ -64,3 +66,17 @@ This type of message which contains only data (and no `com.google.firebase.messa
 need to be handled by the Android client's `FirebaseMessagingService#onMessageReceived(message: RemoteMessage)` 
 override [see the <a href="https://github.com/akitikkx/channel-me-perfect-android">sample 
 Android app</a> for the example implementation].
+
+## Setting up the project
+The project requires that you get a private key file from Firebase. You will need an existing Firebase project and 
+from there navigate to `Project Settings` > `Service Accounts` > `Firebase Admin SDK`. Choose `Java` for the 
+"Admin SDK configuration snippet" then click "Generate new private key".
+
+Store this file in the `src/main/resources` folder. The `src/main/kotlin/com/example/Application.kt` expects the filename to 
+be `ktor-firebase-auth.json`. Feel free to name the file how you would want and remember to update the name inside the 
+`getResourceAsStream()` call in `src/main/kotlin/com/example/Application.kt`
+
+## Dependencies
+- Firebase Admin `com.google.firebase:firebase-admin`
+- Content Negotiation `io.ktor:ktor-server-content-negotiation`
+- Serialization `io.ktor:ktor-serialization-gson`
