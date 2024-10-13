@@ -83,3 +83,43 @@ should remain that way as this is a private file that should not be committed to
 - Firebase Admin `com.google.firebase:firebase-admin`
 - Content Negotiation `io.ktor:ktor-server-content-negotiation`
 - Serialization `io.ktor:ktor-serialization-gson`
+
+## Endpoints
+
+The configurations for the endpoints `send-basic` and `send-android-data-message` are defined in 
+`src/main/kotlin/com/example/routing/NotificationRoutes.kt`
+
+### `send-android-data-message`
+
+Imagine a server that manages user data as part of a service. Users can interact with the service through an app such 
+as an Android app. Certain triggers such as user interactions, new marketing campaigns, reminders or alerts where 
+users will need to be notified in the form of notifications. These notifications will need to be delivered to the users
+who of course have subscribed to app notifications. 
+
+The aim of this sample endpoint is to mimic that scenario where the server needs to send data in the form of a payload 
+[see the JSON above] to their Android users. One of the attributes of note in the payload, is the `channel_id` which
+according the <a href="https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages#androidnotification">documentation</a>:
+
+> channel_id: string
+
+> The notification's channel id (new in Android O). The app must create a channel with this channel ID before any 
+notification with this channel ID is received. If you don't send this channel ID in the request, or if the channel ID 
+provided has not yet been created by the app, FCM uses the channel ID specified in the app manifest.
+
+The configuration as in defined in `src/main/kotlin/com/example/routing/NotificationRoutes.kt` constructs a 
+`com.google.firebase.messaging.Messaging` object particularly using the `putData` builder function to construct a data
+message type. 
+
+Messages from a server can fall into different categories (or channels). To replicate this, the enum 
+class `src/main/kotlin/com/example/models/android/NotificationChannels.kt` has 10 random notification channels for 
+popular Android notification channels for a TV show and movie app defined. Each value has a `title` and `body`. Then in
+`src/main/kotlin/com/example/routing/NotificationRoutes.kt` a channel is picked at random using
+
+```
+val randomChannel = NotificationChannels.entries.toTypedArray().random()
+```
+
+The `title`, `body` and `channel_id` in the data payload are based on the selected `randomChannel`. The Android client 
+will then receive the payload with the data and handle it in `onMessageReceived`. For the `channel_id`, if the Android 
+client has the channel created it will use it, otherwise the channel will be created. [This is the functionality in the 
+<a href="https://github.com/akitikkx/channel-me-perfect-android">sample Android app</a>'s `onMessageReceived`]
