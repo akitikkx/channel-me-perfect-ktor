@@ -1,21 +1,29 @@
 package com.example.routing
 
 import com.example.models.android.NotificationChannels
-import com.example.models.android.testMessage
 import com.example.models.android.testAndroidNotification
-import com.example.models.android.toFirebaseMessage
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.Message
+import com.google.firebase.messaging.Notification
 import io.ktor.http.*
+import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Route.sendNotification() {
     route("/send-basic") {
-        get {
-            // TODO use call.receive
+        post {
+            val token = call.receiveText()
 
-            FirebaseMessaging.getInstance().send(testMessage().toFirebaseMessage())
+            FirebaseMessaging.getInstance()
+                .send(
+                    Message.builder().setNotification(Notification.builder()
+                            .setTitle("This is a test")
+                            .setBody("You are are receiving a test message from the ktor server")
+                            .build()
+                    ).setToken(token)
+                        .build()
+                )
 
             call.respond(HttpStatusCode.OK)
 
@@ -23,8 +31,8 @@ fun Route.sendNotification() {
     }
 
     route("/send-android-data-message") {
-        get {
-            // TODO use call.receive
+        post {
+            val token = call.receiveText()
 
             val randomChannel = NotificationChannels.entries.toTypedArray().random()
 
@@ -57,7 +65,7 @@ fun Route.sendNotification() {
                 .putData("bypass_proxy_notification", testAndroidNotification.bypassProxyNotification.toString())
                 .putData("proxy", testAndroidNotification.proxy.name)
                 // TODO retrieve token from call.receive
-                .setToken("")
+                .setToken(token)
                 .build()
 
             FirebaseMessaging.getInstance().send(message)
